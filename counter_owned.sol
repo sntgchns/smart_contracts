@@ -14,13 +14,20 @@ contract OwnedCounter {
         return counter;
     }
 
-    function inc() public {
-        require(_owner == msg.sender, "Only the owner can increment the counter");
-        counter++;
+    modifier onlyOwner() {
+        require(_owner == msg.sender, "Only the owner can modify the counter");
+        _;
     }
 
-    function dec() public {
-        require(_owner == msg.sender, "Only the owner can decrement the counter");
+    function inc() public onlyOwner {
+        counter++;
+        if (counter == 12)
+            revert("Counter reached 11");
+    }
+
+    function dec() public onlyOwner {
         counter--;
+        if (counter == -12)
+            revert("Counter reached -11");
     }
 }
