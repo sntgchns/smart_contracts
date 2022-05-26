@@ -1,6 +1,10 @@
-contract Counter {}
-    uint public counter;
-    function get() public view returns (uint) {
+pragma solidity ^0.8.6;
+
+contract Counter {
+
+    int public counter;
+
+    function get() public view returns (int) {
         return counter;
     }
 
@@ -11,3 +15,4 @@ contract Counter {}
     function dec() public {
         counter--;
     }
+}
